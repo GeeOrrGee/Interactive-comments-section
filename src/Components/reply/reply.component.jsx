@@ -12,14 +12,14 @@ const Reply = ({ activeReply, replyHost, setActiveReply }) => {
     //////////
     const { commentsCollection } = useContext(CommentsContext);
     const { currentUser, comments } = commentsCollection;
-    console.log(comments);
+    // console.log(comments);
     // const { commentObj } = comments;
     const replyHostArr = comments.filter(
         (commentObj) => commentObj.user.username !== replyHost
     );
 
     const [replyHostObj] = replyHostArr;
-
+    const [comment, setComment] = useState(false);
     // console.log(comments);
     const [replyText, setReplyText] = useState(replyDefaultText);
 
@@ -38,18 +38,12 @@ const Reply = ({ activeReply, replyHost, setActiveReply }) => {
 
     const replyCommentHandler = (event) => {
         setActiveReply(false);
-
+        setComment(true);
         replyHostObj.replies.push(newReply);
         setReplyText(replyDefaultText);
     };
 
-    console.log(replyHostObj);
-    const hostRepliesArray = !replyHostObj.replies
-        ? comments.find(
-              (commentObj) =>
-                  replyHostObj.replyingTo === commentObj.user.username
-          ).replies
-        : replyHostObj.replies;
+    console.log();
 
     return (
         <>
@@ -66,9 +60,8 @@ const Reply = ({ activeReply, replyHost, setActiveReply }) => {
                     <Button onClick={replyCommentHandler} />
                 </div>
             )}
-            {hostRepliesArray.map((reply) => (
-                <Comment comment={reply} />
-            ))}
+
+            {comment && <ReplyComment reply={newReply} />}
         </>
     );
 };

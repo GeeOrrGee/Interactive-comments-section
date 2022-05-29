@@ -1,7 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CommentsContext } from '../../contexts/comments.context';
 import Comment from '../comment-item/comment.component';
 import './comment-section.styles.scss';
+import Replies from '../reply/replies.component';
+import Reply from '../reply/reply.component';
 
 const CommentSection = () => {
     const { commentsCollection } = useContext(CommentsContext);
@@ -15,7 +17,9 @@ const CommentSection = () => {
             <div className='comments-container'>
                 <>
                     {comments.map((commentObj) => (
-                        <Comment comment={commentObj} />
+                        <div className='comment-outter'>
+                            <Comment comment={commentObj} />
+                        </div>
                     ))}
                 </>
             </div>
