@@ -4,22 +4,17 @@ import { CommentsContext } from '../../contexts/comments.context';
 
 import Button from '../buttons/button.component';
 import Comment from '../comment-item/comment.component';
-import ReplyComment from './replyComment.component';
-const Reply = ({ activeReply, replyHost, setActiveReply }) => {
+
+const Reply = ({ username, replies, setReplies, setActiveReply }) => {
     const replyDefaultText = {
-        value: `@${replyHost}`,
+        value: `@${username}`,
     };
     //////////
-    const { commentsCollection } = useContext(CommentsContext);
+    const { commentsCollection, setReplyHost } = useContext(CommentsContext);
     const { currentUser, comments } = commentsCollection;
     // console.log(comments);
     // const { commentObj } = comments;
-    const replyHostArr = comments.filter(
-        (commentObj) => commentObj.user.username !== replyHost
-    );
 
-    const [replyHostObj] = replyHostArr;
-    const [comment, setComment] = useState(false);
     // console.log(comments);
     const [replyText, setReplyText] = useState(replyDefaultText);
 
@@ -31,23 +26,23 @@ const Reply = ({ activeReply, replyHost, setActiveReply }) => {
     const newReply = {
         content: replyText.value,
         user: currentUser,
-        replyingTo: replyHost,
+        replyingTo: username,
         score: 0,
         createdAt: 'time ago',
     };
 
-    const replyCommentHandler = (event) => {
+    const replyHandler = (event) => {
+        setReplyHost(null);
+        setReplies([...replies, newReply]);
+        console.log(replies);
         setActiveReply(false);
-        setComment(true);
-        replyHostObj.replies.push(newReply);
-        setReplyText(replyDefaultText);
     };
 
     console.log();
 
     return (
         <>
-            {activeReply && (
+            {
                 <div className='reply-container'>
                     <img
                         src={require(`../../assets/images/avatars/image-${currentUser.username}.png`)}
@@ -57,11 +52,11 @@ const Reply = ({ activeReply, replyHost, setActiveReply }) => {
                         onChange={eventChangeHandler}
                         value={`${replyText.value}`}
                     ></textarea>
-                    <Button onClick={replyCommentHandler} />
+                    <Button onClick={replyHandler} />
                 </div>
-            )}
+            }
 
-            {comment && <ReplyComment reply={newReply} />}
+            {/* {<ReplyComment reply={newReply} />} */}
         </>
     );
 };

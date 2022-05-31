@@ -1,20 +1,22 @@
-import { useContext } from 'react';
-import { CommentsContext } from '../../contexts/comments.context';
-import Comment from '../comment-item/comment.component';
-import Reply from './reply.component';
-const Replies = ({ replies, replyHost, activeReply, setActiveReply }) => {
+import { useEffect, useState } from 'react';
+import ReplyComment from './replyComment';
+
+const Replies = ({ repliess }) => {
+    const [replies, setReplies] = useState([...repliess]);
+    console.log(replies);
     return (
-        <>
-            {replies && (
-                <div className='replies-container'>
-                    {replies.map((replyObj) => (
-                        <Comment comment={replyObj} />
-                    ))}
-                </div>
-            )}
-       
-        </>
+        <div>
+            {replies.map((replyObj) => (
+                <ReplyComment
+                    setReplies={setReplies}
+                    replies={replies}
+                    reply={replyObj}
+                />
+            ))}
+        </div>
     );
 };
 
 export default Replies;
+
+//figure out how to manage the commentsreplies
