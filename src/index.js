@@ -8,14 +8,12 @@ import ru from 'javascript-time-ago/locale/ru.json';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CommentsProvider } from './contexts/comments.context';
+
 TimeAgo.addDefaultLocale(en);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <CommentsProvider>
-            <App />
-        </CommentsProvider>
+        <App />
     </React.StrictMode>
 );
 

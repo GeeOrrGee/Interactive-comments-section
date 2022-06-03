@@ -1,19 +1,25 @@
-import { useContext, useState } from 'react';
-import { CommentsContext } from '../../contexts/comments.context';
+import { useState } from 'react';
+
 import Button from '../buttons/button.component';
-import Replies from '../reply/replies.component';
-import Reply from '../reply/reply.component';
 
 import './comment.styles.scss';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, currentUser, comments, setComments }) => {
     const { createdAt, content, id, score, user } = comment;
+
     const { image, username } = user;
-    const { replyHost, setReplyHost } = useContext(CommentsContext);
+
     // console.log(typeof user.image.png);
-    const replyHandler = (event) => {
-        setReplyHost(id);
+
+    const replyHandler = (event) => {};
+    const deleteHandler = () => {
+        const filteredComments = comments.filter(
+            (commentObj) => commentObj.id !== id
+        );
+        setComments(filteredComments);
     };
+
+    const editHandler = () => {};
 
     return (
         <>
@@ -32,14 +38,35 @@ const Comment = ({ comment }) => {
                             alt={user.username}
                         />
                         <span>{user.username}</span>
-                        <span>{createdAt}</span>
-                        <Button id={id} onClick={replyHandler} />
+                        {username === currentUser ? (
+                            <>
+                                <span>YOU</span>
+                                <span>{createdAt}</span>
+                                <div className='buttons-container'>
+                                    <Button onClick={deleteHandler}>
+                                        Delete
+                                    </Button>
+
+                                    <Button id={id} onClick={editHandler}>
+                                        Edit
+                                    </Button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <span>{createdAt}</span>
+                                <div className='buttons-container'>
+                                    <Button id={id} onClick={replyHandler}>
+                                        Reply
+                                    </Button>
+                                </div>
+                            </>
+                        )}
                     </header>
                     <div className='content'>{content}</div>
+                    {/* ^^ render here EDITCOMPONENT conditionally, try setting local state and passing it to the edit component, general comments array may not update so fix that too */}
                 </div>
             </div>
-            <Replies repliess={comment.replies} />
-            {id === replyHost && <Reply username={username} />}
         </>
     );
 };

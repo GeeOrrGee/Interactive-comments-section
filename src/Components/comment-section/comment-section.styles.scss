@@ -3,14 +3,13 @@
     align-items: center;
     justify-content: center;
     margin: 50px auto;
+    flex-direction: column;
 
     .comments-container {
-        max-width: 67rem;
+        max-width: 60rem;
         display: grid;
-        row-gap: 3rem;
+        row-gap: 2.5rem;
     }
 }
 
-// 1-Figure out how to modify replying div's position
-// 2-add close active reply button
-//3-style comments
+

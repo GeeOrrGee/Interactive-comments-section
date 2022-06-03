@@ -1,26 +1,34 @@
-import { useContext, useState } from 'react';
-import { CommentsContext } from '../../contexts/comments.context';
 import Comment from '../comment-item/comment.component';
-import Reply from '../reply/reply.component';
+import CommentsData from '../../data.json';
+import { useState } from 'react';
 import './comment-section.styles.scss';
+import AddComment from '../addComment/addComment-component';
 
 const CommentSection = () => {
-    const { commentsCollection } = useContext(CommentsContext);
-    const { currentUser } = commentsCollection;
-    const { comments } = commentsCollection;
-
+    const { comments, currentUser } = CommentsData;
+    const [commentsState, setComments] = useState(comments);
+    console.log(commentsState);
     return (
         <div key={'index'} className='main-section'>
             <div className='comments-container'>
-                <>
-                    {comments.map((commentObj) => (
+                {commentsState.map((commentObj) => {
+                    return (
                         <div className='comment-outter'>
-                            <Comment comment={commentObj} />
-                            <></>
+                            <Comment
+                                comment={commentObj}
+                                currentUser={currentUser.username}
+                                comments={commentsState}
+                                setComments={setComments}
+                            />
                         </div>
-                    ))}
-                </>
+                    );
+                })}
             </div>
+            <AddComment
+                comments={commentsState}
+                setComments={setComments}
+                currentUser={currentUser}
+            />
         </div>
     );
 };
