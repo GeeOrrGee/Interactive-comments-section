@@ -1,5 +1,6 @@
 import Button from '../buttons/button.component';
 import { useState } from 'react';
+import './addComment.styles.scss';
 
 const AddComment = ({
     comments,
@@ -29,14 +30,17 @@ const AddComment = ({
     const setCommentHandler = (event) => {
         event.preventDefault();
         console.log(textValue.value.trim());
-        if (textValue.value.trim() === ``) return resetTextField();
+        if (textValue.value.trim() === ``) return;
         setComments([...comments, newComment]);
         resetTextField();
     };
     return (
         <div className='add-comment-container'>
             <div className='current-user-img'>
-                <img />
+                <img
+                    src={require(`../../assets/images/avatars/image-${currentUser.username}.png`)}
+                    alt={currentUser.username}
+                />
             </div>
             <form onSubmit={setCommentHandler}>
                 <textarea

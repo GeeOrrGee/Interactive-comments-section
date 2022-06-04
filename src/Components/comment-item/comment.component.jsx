@@ -3,21 +3,18 @@ import { useState } from 'react';
 import Button from '../buttons/button.component';
 
 import './comment.styles.scss';
-
+import DeleteModal from '../deleteModal/delete-modal.component';
 const Comment = ({ comment, currentUser, comments, setComments }) => {
     const { createdAt, content, id, score, user } = comment;
     const [commentContent, setContent] = useState(content); //comment update hook
     const [editActive, setEditActive] = useState(false); //edit display hook
     const { image, username } = user;
 
-    // console.log(typeof user.image.png);
-
     const replyHandler = (event) => {};
+    // console.log(typeof user.image.png);
+    const [deleteModalActive, setDeleteModal] = useState(false);
     const deleteHandler = () => {
-        const filteredComments = comments.filter(
-            (commentObj) => commentObj.id !== id
-        );
-        setComments(filteredComments);
+        setDeleteModal(true);
     };
 
     const defaultTextValue = {
@@ -41,6 +38,14 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
     };
     return (
         <>
+            {deleteModalActive && (
+                <DeleteModal
+                    setDeleteModal={setDeleteModal}
+                    comments={comments}
+                    setComments={setComments}
+                    id={id}
+                />
+            )}
             <div key={id} className='comment-container'>
                 <div className='votes-container'>
                     <Button />

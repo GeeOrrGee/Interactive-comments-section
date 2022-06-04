@@ -4,6 +4,8 @@
     justify-content: center;
     margin: 50px auto;
     flex-direction: column;
+    max-width: 60rem;
+    gap: 2.5rem;
 
     .comments-container {
         max-width: 60rem;
@@ -11,5 +13,3 @@
         row-gap: 2.5rem;
     }
 }
-
-
