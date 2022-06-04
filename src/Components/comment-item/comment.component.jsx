@@ -6,7 +6,8 @@ import './comment.styles.scss';
 
 const Comment = ({ comment, currentUser, comments, setComments }) => {
     const { createdAt, content, id, score, user } = comment;
-
+    const [commentContent, setContent] = useState(content); //comment update hook
+    const [editActive, setEditActive] = useState(false); //edit display hook
     const { image, username } = user;
 
     // console.log(typeof user.image.png);
@@ -19,8 +20,25 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
         setComments(filteredComments);
     };
 
-    const editHandler = () => {};
+    const defaultTextValue = {
+        value: commentContent,
+    };
+    const [editValue, setEditValue] = useState(defaultTextValue); //form hook
+    const onChangeHandler = (event) => {
+        setEditValue({ value: event.target.value });
+    };
 
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+        if (editValue.value.trim() === '') return;
+        setContent(editValue.value);
+        setEditActive(false);
+        console.log(comment); //it doesnt update the origin object content value
+    };
+
+    const editHandler = () => {
+        setEditActive(true);
+    };
     return (
         <>
             <div key={id} className='comment-container'>
@@ -63,8 +81,18 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
                             </>
                         )}
                     </header>
-                    <div className='content'>{content}</div>
-                    {/* ^^ render here EDITCOMPONENT conditionally, try setting local state and passing it to the edit component, general comments array may not update so fix that too */}
+                    {!editActive ? (
+                        <div className='content'>{commentContent}</div>
+                    ) : (
+                        <form className='edit-form' onSubmit={onSubmitHandler}>
+                            {' '}
+                            <textarea
+                                onChange={onChangeHandler}
+                                value={editValue.value}
+                            ></textarea>
+                            <Button type='submit'>Update</Button>
+                        </form>
+                    )}
                 </div>
             </div>
         </>

@@ -1,6 +1,6 @@
 .comment-container {
     display: flex;
-    align-items: center;
+
     gap: 2rem;
     padding: 2rem;
     background-color: #fff;
@@ -33,5 +33,24 @@
     .content {
         font-size: 1.2rem;
         max-width: 50rem;
+    }
+    .edit-form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+        textarea {
+            resize: none;
+            border: 1px solid hsl(223, 19%, 93%);
+            width: 94%;
+            border-radius: 5px;
+            min-height: 6rem;
+            overflow: auto;
+            padding: 1rem 1.5rem;
+            &:focus {
+                // transition: all 0.2s;
+                outline: 1px solid hsl(211, 10%, 45%);
+            }
+        }
     }
 }
