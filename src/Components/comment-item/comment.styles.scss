@@ -10,7 +10,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
+        gap: 0.8rem;
+        background-color: rgb(234, 236, 241, 0.5);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        span {
+            color: hsl(238, 40%, 52%);
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
     }
 }
 .comment-content-container {
@@ -25,6 +33,22 @@
         img {
             width: 3rem;
         }
+        .username {
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        .username ~ span {
+            color: hsl(211, 10%, 45%);
+        }
+        .you {
+            padding: 0.15rem 0.4rem 0.15rem 0.4rem;
+            background-color: hsl(238, 40%, 52%);
+            color: white !important;
+        }
+        .you ~ span {
+            color: hsl(211, 10%, 45%);
+        }
+
         .buttons-container {
             margin-left: auto;
             display: flex;
@@ -33,7 +57,9 @@
     }
     .content {
         font-size: 1.2rem;
-        max-width: 50rem;
+        max-width: 47rem;
+        color: hsl(211, 10%, 45%);
+        line-height: 1.4;
     }
     .edit-form {
         display: flex;
@@ -43,14 +69,14 @@
         textarea {
             resize: none;
             border: 1px solid hsl(223, 19%, 93%);
-            width: 94%;
+            width: 100%;
             border-radius: 5px;
             min-height: 6rem;
             overflow: auto;
             padding: 1rem 1.5rem;
             &:focus {
                 // transition: all 0.2s;
-                outline: 1px solid hsl(211, 10%, 45%);
+                outline: 1px solid hsl(238, 40%, 52%);
             }
         }
     }

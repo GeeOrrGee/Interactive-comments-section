@@ -48,9 +48,9 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
             )}
             <div key={id} className='comment-container'>
                 <div className='votes-container'>
-                    <Button />
+                    <Button btnType='vote'>+</Button>
                     <span>{score}</span>
-                    <Button />
+                    <Button btnType='vote'>&#8211;</Button>
                 </div>
                 <div className='comment-content-container'>
                     <header>
@@ -60,18 +60,25 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
                             // src={require(user.image.png)}
                             alt={user.username}
                         />
-                        <span>{user.username}</span>
+                        <span className='username'>{user.username}</span>
                         {username === currentUser ? (
                             <>
-                                <span>YOU</span>
+                                <span className='you'>you</span>
                                 <span>{createdAt}</span>
                                 <div className='buttons-container'>
-                                    <Button onClick={deleteHandler}>
+                                    <Button
+                                        btnType='delete'
+                                        onClick={deleteHandler}
+                                    >
                                         Delete
                                     </Button>
 
-                                    <Button id={id} onClick={editHandler}>
-                                        Edit
+                                    <Button
+                                        id={id}
+                                        btnType='reply'
+                                        onClick={editHandler}
+                                    >
+                                        &#9998; Edit
                                     </Button>
                                 </div>
                             </>
@@ -79,8 +86,12 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
                             <>
                                 <span>{createdAt}</span>
                                 <div className='buttons-container'>
-                                    <Button id={id} onClick={replyHandler}>
-                                        Reply
+                                    <Button
+                                        id={id}
+                                        btnType='reply'
+                                        onClick={replyHandler}
+                                    >
+                                        &#8618; Reply
                                     </Button>
                                 </div>
                             </>
@@ -95,7 +106,7 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
                                 onChange={onChangeHandler}
                                 value={editValue.value}
                             ></textarea>
-                            <Button type='submit'>Update</Button>
+                            <Button btnType='submit'>Update</Button>
                         </form>
                     )}
                 </div>

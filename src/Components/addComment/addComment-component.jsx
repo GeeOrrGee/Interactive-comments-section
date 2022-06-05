@@ -48,7 +48,9 @@ const AddComment = ({
                     value={textValue.value}
                     placeholder='Add a comment...'
                 ></textarea>
-                <Button type='submit'>Add</Button>
+                <Button btnType='submit' type='submit'>
+                    SEND
+                </Button>
             </form>
         </div>
     );

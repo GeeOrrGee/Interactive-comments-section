@@ -24,8 +24,12 @@ const DeleteModal = ({ comments, setComments, id, setDeleteModal }) => {
                     remove the comment and can't be undone.
                 </p>
                 <div className='delete-modal-buttons'>
-                    <Button onClick={cancelDeleteHandler}>NO, CANCEL</Button>
-                    <Button onClick={deleteHandler}>YES, DELETE</Button>
+                    <Button onClick={cancelDeleteHandler} btnType='cancelModal'>
+                        NO, CANCEL
+                    </Button>
+                    <Button btnType='deleteModal' onClick={deleteHandler}>
+                        YES, DELETE
+                    </Button>
                 </div>
             </div>
         </>
