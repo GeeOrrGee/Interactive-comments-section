@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import TimeAgo from 'javascript-time-ago';
-
+import { ReplyProvider } from './contexts/reply.context';
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
 
@@ -13,7 +13,9 @@ TimeAgo.addDefaultLocale(en);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <ReplyProvider>
+            <App />
+        </ReplyProvider>
     </React.StrictMode>
 );
 

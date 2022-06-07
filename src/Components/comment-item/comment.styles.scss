@@ -14,10 +14,15 @@
         background-color: rgb(234, 236, 241, 0.5);
         padding: 0.5rem 1rem;
         border-radius: 8px;
+        height: max-content;
         span {
             color: hsl(238, 40%, 52%);
             font-size: 1.3rem;
             font-weight: 400;
+        }
+        .voteBtn.activeVoteBtn {
+            color: hsl(238, 40%, 52%);
+            opacity: 1;
         }
     }
 }

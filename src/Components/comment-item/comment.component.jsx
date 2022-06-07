@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ReplyContext } from '../../contexts/reply.context';
 
 import Button from '../buttons/button.component';
 
 import './comment.styles.scss';
 import DeleteModal from '../deleteModal/delete-modal.component';
-const Comment = ({ comment, currentUser, comments, setComments }) => {
+const Comment = ({
+    comment,
+    currentUser,
+    comments,
+    setComments,
+    currentReplies,
+    setCurrentReplies,
+}) => {
     const { createdAt, content, id, score, user } = comment;
     const [commentContent, setContent] = useState(content); //comment update hook
     const [editActive, setEditActive] = useState(false); //edit display hook
     const { image, username } = user;
+    const { setActiveReply } = useContext(ReplyContext);
 
-    const replyHandler = (event) => {};
     // console.log(typeof user.image.png);
     const [deleteModalActive, setDeleteModal] = useState(false);
     const deleteHandler = () => {
@@ -24,17 +32,43 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
     const onChangeHandler = (event) => {
         setEditValue({ value: event.target.value });
     };
+    // console.log(typeof comment);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
         if (editValue.value.trim() === '') return;
         setContent(editValue.value);
+        Object.keys(comment).forEach((key) => {
+            if (key !== 'content') return;
+            comment.content = editValue.value; //wtf? with state value it updates way later than this
+        });
         setEditActive(false);
-        console.log(comment); //it doesnt update the origin object content value
     };
 
     const editHandler = () => {
         setEditActive(true);
+    };
+
+    const [initialScore, setScore] = useState(score);
+
+    const incrementHandler = (event) => {
+        // voteState.upvote && event.target.classList.remove('activeVoteBtn');
+
+        if (initialScore === score + 1) {
+            return setScore(score);
+        }
+        setScore(score + 1);
+    };
+
+    const decrementHandler = (event) => {
+        if (initialScore === score - 1) {
+            return setScore(score);
+        }
+        setScore(score - 1);
+    };
+
+    const replyHandler = (event) => {
+        setActiveReply(true);
     };
     return (
         <>
@@ -48,9 +82,13 @@ const Comment = ({ comment, currentUser, comments, setComments }) => {
             )}
             <div key={id} className='comment-container'>
                 <div className='votes-container'>
-                    <Button btnType='vote'>+</Button>
-                    <span>{score}</span>
-                    <Button btnType='vote'>&#8211;</Button>
+                    <Button onClick={incrementHandler} btnType='vote'>
+                        +
+                    </Button>
+                    <span>{initialScore}</span>
+                    <Button onClick={decrementHandler} btnType='vote'>
+                        &#8211;
+                    </Button>
                 </div>
                 <div className='comment-content-container'>
                     <header>

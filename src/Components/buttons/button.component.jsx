@@ -9,7 +9,7 @@ const Button = ({ btnType, ...otherProps }) => {
         cancelModal: 'cancel-modal',
         vote: 'voteBtn',
     }[btnType];
-    console.log(buttonType);
+
     return <button className={`${buttonType}`} {...otherProps}></button>;
 };
 

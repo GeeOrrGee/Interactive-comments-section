@@ -15,7 +15,7 @@ const AddComment = ({
     const resetTextField = () => {
         setTextValue(defaultTextState);
     };
-    console.log(textValue);
+
     const onChangeHandler = (event) => {
         setTextValue({ value: event.target.value });
     };
@@ -26,7 +26,7 @@ const AddComment = ({
         replies: [],
         score: 0,
         user: currentUser,
-    };
+    }; //new comment obj
     const setCommentHandler = (event) => {
         event.preventDefault();
         console.log(textValue.value.trim());

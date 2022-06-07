@@ -3,11 +3,11 @@ import CommentsData from '../../data.json';
 import { useState } from 'react';
 import './comment-section.styles.scss';
 import AddComment from '../addComment/addComment-component';
-
+import Replies from '../Replies/replies.component';
 const CommentSection = () => {
     const { comments, currentUser } = CommentsData;
     const [commentsState, setComments] = useState(comments);
-    console.log(commentsState);
+    // console.log(currentUser);
     return (
         <div key={'index'} className='main-section'>
             <div className='comments-container'>
@@ -19,6 +19,10 @@ const CommentSection = () => {
                                 currentUser={currentUser.username}
                                 comments={commentsState}
                                 setComments={setComments}
+                            />
+                            <Replies
+                                currentUser={currentUser.username}
+                                replies={commentObj.replies}
                             />
                         </div>
                     );
