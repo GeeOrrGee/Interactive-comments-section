@@ -1,13 +1,17 @@
 import Button from '../buttons/button.component';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './addComment.styles.scss';
+import { CommentsContext } from '../../contexts/comments.context';
 
 const AddComment = ({
-    comments,
-    setComments,
     currentUser,
+    setComments,
+    comments,
     defaultContent = ``,
 }) => {
+    const { allCommentsIds, setAllCommentsIds, setReplyhostId } =
+        useContext(CommentsContext);
+
     const defaultTextState = {
         value: defaultContent,
     };
@@ -20,7 +24,7 @@ const AddComment = ({
         setTextValue({ value: event.target.value });
     };
     const newComment = {
-        id: comments.length + 1, //actually setting a future index as an id
+        id: allCommentsIds.length + 1, //actually setting a future index as an id
         content: textValue.value,
         createdAt: 'time ago',
         replies: [],
@@ -29,9 +33,11 @@ const AddComment = ({
     }; //new comment obj
     const setCommentHandler = (event) => {
         event.preventDefault();
-        console.log(textValue.value.trim());
+
         if (textValue.value.trim() === ``) return;
         setComments([...comments, newComment]);
+        setAllCommentsIds([...allCommentsIds, newComment.id]);
+        setReplyhostId(null);
         resetTextField();
     };
     return (

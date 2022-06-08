@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import { ReplyContext } from '../../contexts/reply.context';
 
 import Button from '../buttons/button.component';
 
 import './comment.styles.scss';
 import DeleteModal from '../deleteModal/delete-modal.component';
+import { CommentsContext } from '../../contexts/comments.context';
 const Comment = ({
     comment,
     currentUser,
@@ -17,7 +17,7 @@ const Comment = ({
     const [commentContent, setContent] = useState(content); //comment update hook
     const [editActive, setEditActive] = useState(false); //edit display hook
     const { image, username } = user;
-    const { setActiveReply } = useContext(ReplyContext);
+    const { getReplyHostElement, setReplyHostId } = useContext(CommentsContext);
 
     // console.log(typeof user.image.png);
     const [deleteModalActive, setDeleteModal] = useState(false);
@@ -68,7 +68,9 @@ const Comment = ({
     };
 
     const replyHandler = (event) => {
-        setActiveReply(true);
+        const parentElement = getReplyHostElement(id);
+        console.log(id, comments);
+        // setReplyHostId(parentElement.id);
     };
     return (
         <>

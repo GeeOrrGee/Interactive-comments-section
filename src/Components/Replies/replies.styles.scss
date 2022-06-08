@@ -1,18 +1,21 @@
 .replies-outter {
     margin-top: 1.6rem;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     .replies-container {
         display: flex;
         flex-direction: column;
         width: 90%;
         gap: 1.6rem;
+        margin-left: auto;
     }
 
     .reply-line {
-        width: 1px;
+        margin-left: 3.5rem;
+        width: 1.5px;
         height: auto;
         background-color: black;
         opacity: 0.1;
+        border-radius: 5px;
     }
 }
