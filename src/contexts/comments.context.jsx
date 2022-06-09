@@ -26,7 +26,7 @@ const CommentsProvider = ({ children }) => {
         .reduce((pre, cur) => cur.concat(pre));
 
     const commentsIdsArr = commentsState.map((commentObj) => commentObj.id);
-    const allCommentsIds1 = commentsIdsArr.concat(repliesIdsArr); // STORING ALL IDS TO ACCUMULATE YOU NEED GOD DAMN CONTEXT FFS
+    const allCommentsIds1 = commentsIdsArr.concat(repliesIdsArr); // STORING ALL IDS TO ACCUMULATE
     const [allCommentsIds, setAllCommentsIds] = useState(allCommentsIds1);
 
     const getReplyHostElement = (id) => {

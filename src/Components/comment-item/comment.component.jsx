@@ -69,7 +69,7 @@ const Comment = ({
 
     const replyHandler = (event) => {
         getReplyHostElement(id);
-        console.log(id, comments);
+
         // setReplyHostId(parentElement.id);
     };
     return (

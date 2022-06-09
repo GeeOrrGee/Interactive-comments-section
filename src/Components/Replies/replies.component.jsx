@@ -6,7 +6,7 @@ import './replies.styles.scss';
 
 const Replies = ({ replies, currentUser, parentId }) => {
     const { replyHostId } = useContext(CommentsContext);
-
+    
     console.log(replies);
     return (
         <div className='replies-outter'>
