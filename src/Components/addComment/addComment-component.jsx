@@ -3,13 +3,8 @@ import { useContext, useState } from 'react';
 import './addComment.styles.scss';
 import { CommentsContext } from '../../contexts/comments.context';
 
-const AddComment = ({
-    currentUser,
-
-    comments,
-    defaultContent = ``,
-}) => {
-    const { allCommentsIds, setAllCommentsIds, setReplyhostId } =
+const AddComment = ({ currentUser, comments, defaultContent = `` }) => {
+    const { allCommentsIds, setAllCommentsIds, setReplyHostId } =
         useContext(CommentsContext);
 
     const defaultTextState = {
@@ -37,8 +32,8 @@ const AddComment = ({
         if (textValue.value.trim() === ``) return;
         // setComments([...comments, newComment]);
         comments.push(newComment);
-        setAllCommentsIds([...allCommentsIds, newComment.id]);
-        setReplyhostId(null);
+        setAllCommentsIds([...allCommentsIds, newComment.id]); // am allId arrays gamo mushaobs push/pop
+        setReplyHostId({ id: null, replyingTo: null });
         resetTextField();
     };
     return (

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { CommentsContext } from '../../contexts/comments.context';
 import AddComment from '../addComment/addComment-component';
 import Comment from '../comment-item/comment.component';
@@ -6,8 +6,7 @@ import './replies.styles.scss';
 
 const Replies = ({ replies, currentUser, parentId }) => {
     const { replyHostId } = useContext(CommentsContext);
-    
-    console.log(replies);
+
     return (
         <div className='replies-outter'>
             {' '}
@@ -20,8 +19,12 @@ const Replies = ({ replies, currentUser, parentId }) => {
                         comments={replies}
                     />
                 ))}
-                {parentId === replyHostId && (
-                    <AddComment comments={replies} currentUser={currentUser} />
+                {parentId === replyHostId.id && (
+                    <AddComment
+                        comments={replies}
+                        defaultContent={`@${replyHostId.replyingTo}`}
+                        currentUser={currentUser}
+                    />
                 )}
             </div>
         </div>

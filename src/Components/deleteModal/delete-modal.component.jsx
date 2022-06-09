@@ -10,10 +10,10 @@ const DeleteModal = ({ comments, id, setDeleteModal }) => {
         //     (commentObj) => commentObj.id !== id
         // );
         // setComments(filteredComments);
-        setAllCommentsIds(allCommentsIds.filter((idObj) => idObj !== id));
+        setAllCommentsIds(allCommentsIds.filter((idObj) => idObj !== id)); // no idea ;D
         setDeleteModal(false);
         console.log(allCommentsIds);
-        return comments.pop((commentObj) => commentObj === id); // liiterally last bug <<<<<--------
+        return comments.pop((commentObj) => commentObj === id);
     };
 
     const cancelDeleteHandler = () => {

@@ -1,25 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
-
+import { useContext, useState } from 'react';
 import Button from '../buttons/button.component';
-
 import './comment.styles.scss';
 import DeleteModal from '../deleteModal/delete-modal.component';
 import { CommentsContext } from '../../contexts/comments.context';
-const Comment = ({
-    comment,
-    currentUser,
-    comments,
-    setComments,
-    currentReplies,
-    setCurrentReplies,
-}) => {
+const Comment = ({ comment, currentUser, comments }) => {
     const { createdAt, content, id, score, user } = comment;
     const [commentContent, setContent] = useState(content); //comment update hook
     const [editActive, setEditActive] = useState(false); //edit display hook
-    const { image, username } = user;
-    const { getReplyHostElement, setReplyHostId } = useContext(CommentsContext);
+    const { username } = user;
+    const { getReplyHostElement, replyHostId, setReplyHostId } =
+        useContext(CommentsContext);
 
-    // console.log(typeof user.image.png);
     const [deleteModalActive, setDeleteModal] = useState(false);
     const deleteHandler = () => {
         setDeleteModal(true);
@@ -32,7 +23,6 @@ const Comment = ({
     const onChangeHandler = (event) => {
         setEditValue({ value: event.target.value });
     };
-    // console.log(typeof comment);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -40,7 +30,7 @@ const Comment = ({
         setContent(editValue.value);
         Object.keys(comment).forEach((key) => {
             if (key !== 'content') return;
-            comment.content = editValue.value; //wtf? with state value it updates way later than this
+            comment.content = editValue.value;
         });
         setEditActive(false);
     };
@@ -52,8 +42,6 @@ const Comment = ({
     const [initialScore, setScore] = useState(score);
 
     const incrementHandler = (event) => {
-        // voteState.upvote && event.target.classList.remove('activeVoteBtn');
-
         if (initialScore === score + 1) {
             return setScore(score);
         }
@@ -68,9 +56,10 @@ const Comment = ({
     };
 
     const replyHandler = (event) => {
-        getReplyHostElement(id);
-
-        // setReplyHostId(parentElement.id);
+        getReplyHostElement(id, username);
+        if (replyHostId.id) {
+            return setReplyHostId(null);
+        }
     };
     return (
         <>

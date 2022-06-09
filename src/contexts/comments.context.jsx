@@ -12,7 +12,10 @@ export const CommentsContext = createContext({
 
 const CommentsProvider = ({ children }) => {
     const [commentsState, setComments] = useState(comments);
-    const [replyHostId, setReplyhostId] = useState(null);
+    const [replyHostId, setReplyHostId] = useState({
+        id: null,
+        replyingTo: null,
+    });
     // const allReplies = comments.map((commentObj) => commentObj.replies);
 
     // const repliesIdsArr = commentsState
@@ -29,7 +32,8 @@ const CommentsProvider = ({ children }) => {
     const allCommentsIds1 = commentsIdsArr.concat(repliesIdsArr); // STORING ALL IDS TO ACCUMULATE
     const [allCommentsIds, setAllCommentsIds] = useState(allCommentsIds1);
 
-    const getReplyHostElement = (id) => {
+    const getReplyHostElement = (id, username) => {
+        console.log(username);
         const commentHostId = commentsState.find(
             (commentObj) => commentObj.id === id
         );
@@ -39,19 +43,25 @@ const CommentsProvider = ({ children }) => {
                 commentObj.replies.find((replyObj) => replyObj.id === id)
             );
             console.log(parentElement);
-            return setReplyhostId(parentElement.id);
+            return setReplyHostId({
+                id: parentElement.id,
+                replyingTo: username,
+            });
         }
-        return setReplyhostId(commentHostId.id);
+        return setReplyHostId({
+            id: commentHostId.id,
+            replyingTo: username,
+        });
     };
-
+    console.log(replyHostId.replyingTo);
     const value = {
-        commentsState,
+        commentsState, // using to display main comments feed
         setComments,
-        allCommentsIds,
+        allCommentsIds, // to store unique comments id array
         setAllCommentsIds,
-        getReplyHostElement,
-        replyHostId,
-        setReplyhostId,
+        getReplyHostElement, // to get the parent element for replying functionality
+        replyHostId, //to display addComment component based on the id condition for replying
+        setReplyHostId,
     };
     return (
         <CommentsContext.Provider value={value}>
