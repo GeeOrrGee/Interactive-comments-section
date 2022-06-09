@@ -1,13 +1,15 @@
 import Button from '../buttons/button.component';
 import './delete-modal.styles.scss';
 
-const DeleteModal = ({ comments, setComments, id, setDeleteModal }) => {
+const DeleteModal = ({ comments, id, setDeleteModal }) => {
     const deleteHandler = () => {
-        const filteredComments = comments.filter(
-            (commentObj) => commentObj.id !== id
-        );
-        setComments(filteredComments);
+        // const filteredComments = comments.filter(
+        //     (commentObj) => commentObj.id !== id
+        // );
+        // setComments(filteredComments);
         setDeleteModal(false);
+        console.log(comments);
+        return comments.pop((commentObj) => commentObj === id); // liiterally last bug <<<<<--------
     };
 
     const cancelDeleteHandler = () => {

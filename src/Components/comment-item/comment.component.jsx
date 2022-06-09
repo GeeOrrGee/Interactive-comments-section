@@ -68,7 +68,7 @@ const Comment = ({
     };
 
     const replyHandler = (event) => {
-        const parentElement = getReplyHostElement(id);
+        getReplyHostElement(id);
         console.log(id, comments);
         // setReplyHostId(parentElement.id);
     };
@@ -78,7 +78,6 @@ const Comment = ({
                 <DeleteModal
                     setDeleteModal={setDeleteModal}
                     comments={comments}
-                    setComments={setComments}
                     id={id}
                 />
             )}

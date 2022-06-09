@@ -5,7 +5,7 @@ import { CommentsContext } from '../../contexts/comments.context';
 
 const AddComment = ({
     currentUser,
-    setComments,
+
     comments,
     defaultContent = ``,
 }) => {
@@ -35,7 +35,8 @@ const AddComment = ({
         event.preventDefault();
 
         if (textValue.value.trim() === ``) return;
-        setComments([...comments, newComment]);
+        // setComments([...comments, newComment]);
+        comments.push(newComment);
         setAllCommentsIds([...allCommentsIds, newComment.id]);
         setReplyhostId(null);
         resetTextField();

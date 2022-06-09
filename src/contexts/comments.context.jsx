@@ -33,9 +33,9 @@ const CommentsProvider = ({ children }) => {
         const commentHostId = commentsState.find(
             (commentObj) => commentObj.id === id
         );
-        console.log(commentsState);
+        console.log(commentHostId);
         if (!commentHostId) {
-            const parentElement = commentsState.filter((commentObj) =>
+            const [parentElement] = commentsState.filter((commentObj) =>
                 commentObj.replies.find((replyObj) => replyObj.id === id)
             );
             console.log(parentElement);
