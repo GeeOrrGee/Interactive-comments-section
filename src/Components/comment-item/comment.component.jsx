@@ -8,8 +8,7 @@ const Comment = ({ comment, currentUser, comments }) => {
     const [commentContent, setContent] = useState(content); //comment update hook
     const [editActive, setEditActive] = useState(false); //edit display hook
     const { username } = user;
-    const { getReplyHostElement, replyHostId, setReplyHostId } =
-        useContext(CommentsContext);
+    const { getReplyHostElement, replyHostId } = useContext(CommentsContext);
 
     const [deleteModalActive, setDeleteModal] = useState(false);
     const deleteHandler = () => {
@@ -56,10 +55,10 @@ const Comment = ({ comment, currentUser, comments }) => {
     };
 
     const replyHandler = (event) => {
-        getReplyHostElement(id, username);
         if (replyHostId.id) {
-            return setReplyHostId(null);
+            return; //setReplyHostId({}) <-- this used to display replyForm on every replyBtn click, despite the replies objects itself
         }
+        getReplyHostElement(id, username);
     };
     return (
         <>

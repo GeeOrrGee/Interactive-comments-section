@@ -24,6 +24,7 @@ const Replies = ({ replies, currentUser, parentId }) => {
                         comments={replies}
                         defaultContent={`@${replyHostId.replyingTo}`}
                         currentUser={currentUser}
+                        replyCancel={true}
                     />
                 )}
             </div>

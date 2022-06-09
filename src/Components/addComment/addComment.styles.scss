@@ -33,5 +33,18 @@
                 outline: 1px solid hsl(238, 40%, 52%);
             }
         }
+        .activeReplyBtn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            #replyCancelBtn {
+                padding: 1rem 1.4rem;
+                // background-color: red;
+                color: #fff;
+                opacity: 1;
+                border-radius: 8px;
+            }
+        }
     }
 }

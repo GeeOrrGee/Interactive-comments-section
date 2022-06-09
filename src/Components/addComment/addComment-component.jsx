@@ -3,7 +3,12 @@ import { useContext, useState } from 'react';
 import './addComment.styles.scss';
 import { CommentsContext } from '../../contexts/comments.context';
 
-const AddComment = ({ currentUser, comments, defaultContent = `` }) => {
+const AddComment = ({
+    currentUser,
+    comments,
+    replyCancel = null,
+    defaultContent = ``,
+}) => {
     const { allCommentsIds, setAllCommentsIds, setReplyHostId } =
         useContext(CommentsContext);
 
@@ -50,9 +55,21 @@ const AddComment = ({ currentUser, comments, defaultContent = `` }) => {
                     value={textValue.value}
                     placeholder='Add a comment...'
                 ></textarea>
-                <Button btnType='submit' type='submit'>
-                    SEND
-                </Button>
+                <div className='activeReplyBtn-container'>
+                    {' '}
+                    <Button btnType='submit' type='submit'>
+                        SEND
+                    </Button>
+                    {replyCancel && (
+                        <Button
+                            btnType='deleteModal'
+                            id='replyCancelBtn'
+                            onClick={() => setReplyHostId({})}
+                        >
+                            CANCEL
+                        </Button>
+                    )}
+                </div>
             </form>
         </div>
     );
