@@ -5,11 +5,12 @@
     margin: 50px auto;
     flex-direction: column;
     max-width: 60rem;
+    width: 95vw;
     gap: 2.5rem;
 
     .comments-container {
-        max-width: 60rem;
         display: grid;
         row-gap: 2.5rem;
+        width: 100%;
     }
 }

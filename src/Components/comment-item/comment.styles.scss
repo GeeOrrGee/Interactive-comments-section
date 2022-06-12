@@ -27,7 +27,7 @@
     }
 }
 .comment-content-container {
-    width: 50rem;
+    width: 100%;
 
     header {
         display: flex;
@@ -84,6 +84,16 @@
                 // transition: all 0.2s;
                 outline: 1px solid hsl(238, 40%, 52%);
             }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .comment-container {
+        flex-wrap: wrap;
+        .votes-container {
+            order: 2;
+            flex-direction: row;
         }
     }
 }
